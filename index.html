@@ -1,0 +1,816 @@
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>CyberEdu — Learn Cybersecurity</title>    <style>  
+    * {  
+      margin: 0;  
+      padding: 0;  
+      box-sizing: border-box;  
+      font-family: Arial, sans-serif;  
+    }  
+  
+    :root {  
+      --bg: #05070d;  
+      --card: #0d111c;  
+      --card2: #111827;  
+      --text: #f5f7ff;  
+      --muted: #9ca3af;  
+      --green: #00ff9d;  
+      --blue: #00aaff;  
+      --border: #1f2937;  
+    }  
+  
+    body {  
+      background: var(--bg);  
+      color: var(--text);  
+      line-height: 1.6;  
+    }  
+  
+    /* NAVBAR */  
+    nav {  
+      position: sticky;  
+      top: 0;  
+      z-index: 1000;  
+      background: rgba(5,7,13,.95);  
+      backdrop-filter: blur(12px);  
+      border-bottom: 1px solid var(--border);  
+    }  
+  
+    .nav-container {  
+      max-width: 1200px;  
+      margin: auto;  
+      padding: 15px 20px;  
+      display: flex;  
+      align-items: center;  
+      justify-content: space-between;  
+    }  
+  
+    .logo {  
+      font-size: 23px;  
+      font-weight: bold;  
+      color: var(--green);  
+    }  
+  
+    .logo span {  
+      color: white;  
+    }  
+  
+    .nav-links {  
+      display: flex;  
+      gap: 22px;  
+      list-style: none;  
+    }  
+  
+    .nav-links a {  
+      color: #ddd;  
+      text-decoration: none;  
+      font-size: 14px;  
+    }  
+  
+    .nav-links a:hover {  
+      color: var(--green);  
+    }  
+  
+    .menu {  
+      display: none;  
+      font-size: 25px;  
+      cursor: pointer;  
+    }  
+  
+    /* HERO */  
+    .hero {  
+      min-height: 620px;  
+      display: flex;  
+      align-items: center;  
+      justify-content: center;  
+      text-align: center;  
+      padding: 70px 20px;  
+      background:  
+        radial-gradient(circle at 50% 30%, rgba(0,255,157,.12), transparent 35%),  
+        radial-gradient(circle at 80% 70%, rgba(0,170,255,.08), transparent 30%);  
+    }  
+  
+    .hero-content {  
+      max-width: 800px;  
+    }  
+  
+    .badge {  
+      display: inline-block;  
+      padding: 7px 14px;  
+      border: 1px solid rgba(0,255,157,.4);  
+      color: var(--green);  
+      border-radius: 30px;  
+      font-size: 13px;  
+      margin-bottom: 20px;  
+      background: rgba(0,255,157,.05);  
+    }  
+  
+    .hero h1 {  
+      font-size: clamp(42px, 8vw, 76px);  
+      line-height: 1.05;  
+      margin-bottom: 20px;  
+    }  
+  
+    .hero h1 span {  
+      color: var(--green);  
+    }  
+  
+    .hero p {  
+      color: var(--muted);  
+      max-width: 650px;  
+      margin: auto;  
+      font-size: 17px;  
+    }  
+  
+    .buttons {  
+      margin-top: 30px;  
+      display: flex;  
+      justify-content: center;  
+      gap: 12px;  
+      flex-wrap: wrap;  
+    }  
+  
+    .btn {  
+      padding: 13px 22px;  
+      border-radius: 8px;  
+      text-decoration: none;  
+      border: none;  
+      cursor: pointer;  
+      font-weight: bold;  
+    }  
+  
+    .primary {  
+      background: var(--green);  
+      color: #00150d;  
+    }  
+  
+    .secondary {  
+      background: transparent;  
+      border: 1px solid var(--border);  
+      color: white;  
+    }  
+  
+    /* SECTIONS */  
+    section {  
+      max-width: 1200px;  
+      margin: auto;  
+      padding: 75px 20px;  
+    }  
+  
+    .section-title {  
+      text-align: center;  
+      margin-bottom: 45px;  
+    }  
+  
+    .section-title h2 {  
+      font-size: 34px;  
+      margin-bottom: 8px;  
+    }  
+  
+    .section-title p {  
+      color: var(--muted);  
+    }  
+  
+    /* STATS */  
+    .stats {  
+      display: grid;  
+      grid-template-columns: repeat(4, 1fr);  
+      gap: 15px;  
+    }  
+  
+    .stat {  
+      background: var(--card);  
+      border: 1px solid var(--border);  
+      padding: 25px;  
+      text-align: center;  
+      border-radius: 12px;  
+    }  
+  
+    .stat h3 {  
+      color: var(--green);  
+      font-size: 28px;  
+    }  
+  
+    .stat p {  
+      color: var(--muted);  
+      font-size: 13px;  
+    }  
+  
+    /* COURSES */  
+    .courses {  
+      display: grid;  
+      grid-template-columns: repeat(3, 1fr);  
+      gap: 20px;  
+    }  
+  
+    .course {  
+      background: var(--card);  
+      border: 1px solid var(--border);  
+      padding: 25px;  
+      border-radius: 14px;  
+      transition: .25s;  
+    }  
+  
+    .course:hover {  
+      transform: translateY(-5px);  
+      border-color: var(--green);  
+    }  
+  
+    .course-icon {  
+      font-size: 35px;  
+      margin-bottom: 15px;  
+    }  
+  
+    .course h3 {  
+      margin-bottom: 8px;  
+    }  
+  
+    .course p {  
+      color: var(--muted);  
+      font-size: 14px;  
+      margin-bottom: 15px;  
+    }  
+  
+    .progress {  
+      height: 6px;  
+      background: #1f2937;  
+      border-radius: 20px;  
+      overflow: hidden;  
+      margin: 10px 0;  
+    }  
+  
+    .progress div {  
+      height: 100%;  
+      background: var(--green);  
+    }  
+  
+    /* LAB */  
+    .lab {  
+      background: linear-gradient(135deg,#0b111b,#08131a);  
+      border: 1px solid var(--border);  
+      border-radius: 16px;  
+      padding: 30px;  
+    }  
+  
+    .terminal {  
+      margin-top: 20px;  
+      background: #020406;  
+      border: 1px solid #202833;  
+      padding: 20px;  
+      border-radius: 10px;  
+      color: #a7f3d0;  
+      font-family: monospace;  
+      min-height: 180px;  
+    }  
+  
+    .terminal-input {  
+      width: 100%;  
+      margin-top: 15px;  
+      padding: 12px;  
+      background: #080b10;  
+      color: white;  
+      border: 1px solid #273244;  
+      border-radius: 7px;  
+    }  
+  
+    /* QUIZ */  
+    .quiz {  
+      max-width: 700px;  
+      margin: auto;  
+      background: var(--card);  
+      border: 1px solid var(--border);  
+      padding: 30px;  
+      border-radius: 15px;  
+    }  
+  
+    .quiz button {  
+      width: 100%;  
+      padding: 12px;  
+      margin-top: 10px;  
+      background: #111827;  
+      color: white;  
+      border: 1px solid #273244;  
+      border-radius: 7px;  
+      cursor: pointer;  
+      text-align: left;  
+    }  
+  
+    .quiz button:hover {  
+      border-color: var(--green);  
+    }  
+  
+    #quiz-result {  
+      margin-top: 20px;  
+      color: var(--green);  
+      font-weight: bold;  
+    }  
+  
+    /* DASHBOARD */  
+    .dashboard {  
+      display: grid;  
+      grid-template-columns: 1fr 1fr;  
+      gap: 20px;  
+    }  
+  
+    .dash-card {  
+      background: var(--card);  
+      border: 1px solid var(--border);  
+      padding: 25px;  
+      border-radius: 14px;  
+    }  
+  
+    .dash-card h3 {  
+      margin-bottom: 15px;  
+    }  
+  
+    .xp {  
+      font-size: 40px;  
+      color: var(--green);  
+      font-weight: bold;  
+    }  
+  
+    /* FOOTER */  
+    footer {  
+      border-top: 1px solid var(--border);  
+      text-align: center;  
+      padding: 30px 20px;  
+      color: var(--muted);  
+      font-size: 13px;  
+    }  
+  
+    /* MOBILE */  
+    @media(max-width: 800px) {  
+  
+      .nav-links {  
+        display: none;  
+        position: absolute;  
+        top: 60px;  
+        left: 0;  
+        width: 100%;  
+        background: #070a11;  
+        flex-direction: column;  
+        padding: 20px;  
+        border-bottom: 1px solid var(--border);  
+      }  
+  
+      .nav-links.active {  
+        display: flex;  
+      }  
+  
+      .menu {  
+        display: block;  
+      }  
+  
+      .stats {  
+        grid-template-columns: repeat(2,1fr);  
+      }  
+  
+      .courses {  
+        grid-template-columns: 1fr;  
+      }  
+  
+      .dashboard {  
+        grid-template-columns: 1fr;  
+      }  
+  
+      .hero {  
+        min-height: 550px;  
+      }  
+  
+      section {  
+        padding: 55px 15px;  
+      }  
+    }  
+  
+    @media(max-width:450px) {  
+      .stats {  
+        grid-template-columns: 1fr;  
+      }  
+  
+      .hero h1 {  
+        font-size: 43px;  
+      }  
+  
+      .hero p {  
+        font-size: 15px;  
+      }  
+    }  
+  </style>  </head>  <body>    <!-- NAVBAR -->    <nav>  
+    <div class="nav-container">  <div class="logo">  
+    Cyber<span>Edu</span> 🔐  
+  </div>  
+
+  <div class="menu" onclick="toggleMenu()">☰</div>  
+
+  <ul class="nav-links" id="navLinks">  
+    <li><a href="#home">Home</a></li>  
+    <li><a href="#courses">Courses</a></li>  
+    <li><a href="#lab">Practice Lab</a></li>  
+    <li><a href="#quiz">Quiz</a></li>  
+    <li><a href="#dashboard">Dashboard</a></li>  
+  </ul>  
+
+</div>
+
+  </nav>    <!-- HERO -->    <div class="hero" id="home">  
+    <div class="hero-content">  <div class="badge">  
+    🛡️ Learn • Practice • Protect  
+  </div>  
+
+  <h1>  
+    Learn <span>Cybersecurity</span><br>  
+    The Smart Way  
+  </h1>  
+
+  <p>  
+    Learn ethical hacking, web security, networking,  
+    Linux and cybersecurity through beginner-friendly  
+    lessons and safe practice labs.  
+  </p>  
+
+  <div class="buttons">  
+    <a href="#courses" class="btn primary">  
+      Start Learning  
+    </a>  
+
+    <a href="#lab" class="btn secondary">  
+      Explore Lab  
+    </a>  
+  </div>  
+
+</div>
+
+  </div>    <!-- STATS -->    <section>  <div class="stats">  
+
+  <div class="stat">  
+    <h3>25+</h3>  
+    <p>Lessons</p>  
+  </div>  
+
+  <div class="stat">  
+    <h3>10+</h3>  
+    <p>Practice Labs</p>  
+  </div>  
+
+  <div class="stat">  
+    <h3>50+</h3>  
+    <p>Quiz Questions</p>  
+  </div>  
+
+  <div class="stat">  
+    <h3>100%</h3>  
+    <p>Educational</p>  
+  </div>  
+
+</div>
+
+  </section>    <!-- COURSES -->    <section id="courses">  <div class="section-title">  
+  <h2>Cybersecurity Courses</h2>  
+  <p>Build your skills step by step.</p>  
+</div>  
+
+<div class="courses">  
+
+  <div class="course">  
+    <div class="course-icon">🌐</div>  
+    <h3>Networking Basics</h3>  
+    <p>  
+      Learn IP addresses, DNS, HTTP,  
+      TCP/IP and basic network security.  
+    </p>  
+
+    <div class="progress">  
+      <div style="width:70%"></div>  
+    </div>  
+
+    <small>70% completed</small>  
+  </div>  
+
+
+  <div class="course">  
+    <div class="course-icon">🐧</div>  
+    <h3>Linux Fundamentals</h3>  
+    <p>  
+      Learn Linux commands, files,  
+      permissions and system basics.  
+    </p>  
+
+    <div class="progress">  
+      <div style="width:45%"></div>  
+    </div>  
+
+    <small>45% completed</small>  
+  </div>  
+
+
+  <div class="course">  
+    <div class="course-icon">🛡️</div>  
+    <h3>Ethical Hacking</h3>  
+    <p>  
+      Understand security testing,  
+      vulnerabilities and responsible disclosure.  
+    </p>  
+
+    <div class="progress">  
+      <div style="width:25%"></div>  
+    </div>  
+
+    <small>25% completed</small>  
+  </div>  
+
+
+  <div class="course">  
+    <div class="course-icon">🔐</div>  
+    <h3>Web Security</h3>  
+    <p>  
+      Learn authentication, sessions,  
+      input validation and common web risks.  
+    </p>  
+
+    <div class="progress">  
+      <div style="width:30%"></div>  
+    </div>  
+
+    <small>30% completed</small>  
+  </div>  
+
+
+  <div class="course">  
+    <div class="course-icon">🔎</div>  
+    <h3>OSINT Basics</h3>  
+    <p>  
+      Learn responsible information research  
+      using public and permitted sources.  
+    </p>  
+
+    <div class="progress">  
+      <div style="width:15%"></div>  
+    </div>  
+
+    <small>15% completed</small>  
+  </div>  
+
+
+  <div class="course">  
+    <div class="course-icon">🚨</div>  
+    <h3>Cyber Safety</h3>  
+    <p>  
+      Learn phishing awareness, account security,  
+      privacy and safe browsing.  
+    </p>  
+
+    <div class="progress">  
+      <div style="width:80%"></div>  
+    </div>  
+
+    <small>80% completed</small>  
+  </div>  
+
+</div>
+
+  </section>    <!-- PRACTICE LAB -->    <section id="lab">  <div class="section-title">  
+  <h2>🧪 Safe Practice Lab</h2>  
+  <p>Practice using simulated data only.</p>  
+</div>  
+
+<div class="lab">  
+
+  <h3>Dummy Security Terminal</h3>  
+
+  <p style="color:#9ca3af;">  
+    This is an educational simulator.  
+    It does not connect to real devices, accounts  
+    or websites.  
+  </p>  
+
+  <div class="terminal" id="terminal">  
+
+    CyberEdu Terminal v1.0<br>  
+    Type <b>help</b> to see available commands.<br><br>  
+    cyberedu@lab:~$  
+
+  </div>  
+
+  <input  
+    class="terminal-input"  
+    id="terminalInput"  
+    placeholder="Try: help"  
+    onkeydown="terminalCommand(event)"  
+  >  
+
+</div>
+
+  </section>    <!-- QUIZ -->    <section id="quiz">  <div class="section-title">  
+  <h2>🧠 Cyber Quiz</h2>  
+  <p>Test your cybersecurity knowledge.</p>  
+</div>  
+
+<div class="quiz">  
+
+  <h3>  
+    Which one helps protect an account?  
+  </h3>  
+
+  <button onclick="answer(1)">  
+    A. Reusing the same password everywhere  
+  </button>  
+
+  <button onclick="answer(2)">  
+    B. Using a strong unique password + MFA  
+  </button>  
+
+  <button onclick="answer(3)">  
+    C. Sharing OTP with someone  
+  </button>  
+
+  <button onclick="answer(4)">  
+    D. Disabling security alerts  
+  </button>  
+
+  <div id="quiz-result"></div>  
+
+</div>
+
+  </section>    <!-- DASHBOARD -->    <section id="dashboard">  <div class="section-title">  
+  <h2>👤 Student Dashboard</h2>  
+  <p>Track your CyberEdu learning progress.</p>  
+</div>  
+
+<div class="dashboard">  
+
+  <div class="dash-card">  
+
+    <h3>Student</h3>  
+
+    <h2>  
+      Abhishek Rajak  
+    </h2>  
+
+    <p style="color:#9ca3af;">  
+      Cybersecurity Beginner  
+    </p>  
+
+  </div>  
+
+
+  <div class="dash-card">  
+
+    <h3>XP Points</h3>  
+
+    <div class="xp">  
+      1,250 XP  
+    </div>  
+
+    <p style="color:#9ca3af;">  
+      Keep learning to unlock new badges.  
+    </p>  
+
+  </div>  
+
+
+  <div class="dash-card">  
+
+    <h3>🏆 Badges</h3>  
+
+    <p>🛡️ Cyber Safety</p>  
+    <p>🌐 Networking Beginner</p>  
+    <p>🔐 Password Security</p>  
+
+  </div>  
+
+
+  <div class="dash-card">  
+
+    <h3>📈 Overall Progress</h3>  
+
+    <div class="progress">  
+      <div style="width:52%"></div>  
+    </div>  
+
+    <strong>52%</strong>  
+
+  </div>  
+
+</div>
+
+  </section>    <!-- FOOTER -->    <footer>  <p>  
+  © 2026 CyberEdu — Cybersecurity Education Platform  
+</p>  
+
+<p style="margin-top:7px;">  
+  Learn responsibly. Practice legally. Protect everyone.  
+</p>
+
+  </footer>    <script>  
+  
+    /* MOBILE MENU */  
+  
+    function toggleMenu() {  
+  
+      document  
+        .getElementById("navLinks")  
+        .classList  
+        .toggle("active");  
+  
+    }  
+  
+  
+    /* QUIZ */  
+  
+    function answer(option) {  
+  
+      const result =  
+        document.getElementById("quiz-result");  
+  
+      if(option === 2) {  
+  
+        result.innerHTML =  
+          "✅ Correct! Strong unique passwords and MFA improve account security.";  
+  
+      } else {  
+  
+        result.innerHTML =  
+          "❌ Not quite. Try again!";  
+  
+      }  
+  
+    }  
+  
+  
+    /* SAFE TERMINAL */  
+  
+    function terminalCommand(event) {  
+  
+      if(event.key !== "Enter") return;  
+  
+      const input =  
+        document.getElementById("terminalInput");  
+  
+      const terminal =  
+        document.getElementById("terminal");  
+  
+      const command =  
+        input.value.trim().toLowerCase();  
+  
+      if(command === "help") {  
+  
+        terminal.innerHTML +=  
+          "<br><br>" +  
+          "Available commands:<br>" +  
+          "help — show commands<br>" +  
+          "status — show lab status<br>" +  
+          "about — about CyberEdu<br>" +  
+          "clear — clear terminal<br>" +  
+          "scan-demo — run dummy security scan";  
+  
+      }  
+  
+      else if(command === "status") {  
+  
+        terminal.innerHTML +=  
+          "<br><br>🟢 Lab Status: ONLINE";  
+  
+      }  
+  
+      else if(command === "about") {  
+  
+        terminal.innerHTML +=  
+          "<br><br>CyberEdu is an educational cybersecurity simulator.";  
+  
+      }  
+  
+      else if(command === "scan-demo") {  
+  
+        terminal.innerHTML +=  
+          "<br><br>" +  
+          "Starting SAFE DEMO scan...<br>" +  
+          "[1] Dummy Web Server ........ OK<br>" +  
+          "[2] Dummy Login ............. OK<br>" +  
+          "[3] Dummy Database .......... OK<br>" +  
+          "No real systems were contacted.";  
+  
+      }  
+  
+      else if(command === "clear") {  
+  
+        terminal.innerHTML =  
+          "cyberedu@lab:~$";  
+  
+      }  
+  
+      else {  
+  
+        terminal.innerHTML +=  
+          "<br><br>Command not found. Type <b>help</b>.";  
+  
+      }  
+  
+      input.value = "";  
+  
+      terminal.scrollTop =  
+        terminal.scrollHeight;  
+  
+    }  
+  
+  </script>  </body>  
+  </html>
